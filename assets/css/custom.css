@@ -1,0 +1,130 @@
+/* CSS Document */
+
+form {
+	overflow:hidden;
+	padding-bottom: 5px;
+}
+
+nav {
+	margin-top: 15px;
+}
+
+.filename {
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+body .form-group {
+	margin-bottom: 0px;
+}
+
+.new_file .btn {
+	float: left; 
+	width: 50%;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+
+.table_content label {
+	margin-right: 10px;
+}
+
+.table_content a {
+	padding: 0px 8px;
+	background-color: #f3f3f3;
+	display: inline-block;
+	height: 30px;
+	margin: 0px 1px !important;
+	border: 1px solid #e1e1e1;
+	line-height: 30px;
+	vertical-align: middle;
+}
+
+.table_content tr {
+	background-color: #ffffff;
+}
+
+.table_content tr td:nth-child(1),
+.table_content thead tr th:nth-child(1),
+.table_content tfoot tr th:nth-child(1) {
+	width: 110px;
+	border: 1px solid #090 !important;
+}
+
+.table_content thead tr th:nth-child(1) a,
+.table_content thead tr th:nth-child(1) label,
+.table_content tbody tr td:nth-child(1) label,
+.table_content tbody tr td:nth-child(1) a,
+.table_content tfoot tr th:nth-child(1) a,
+.table_content tfoot tr th:nth-child(1) label {
+	margin: 0px 2px;
+}
+
+.table_content input {
+	width: 100%;
+}
+
+.table_content > tbody > tr > td {
+	padding: 0px;
+	border: 0px;
+	white-space: nowrap;
+}
+
+.table > thead > tr > th,
+.table > tfoot > tr > th {
+    border: 0px;
+	padding: 0px;
+	position: relative;
+}
+
+.table > thead > tr > th span {
+    position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.body-content form {
+	padding: 0px;
+	margin: 0px;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="email"] {
+	display: block;
+	width: 100%;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}

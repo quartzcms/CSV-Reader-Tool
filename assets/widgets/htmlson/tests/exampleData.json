@@ -1,0 +1,29 @@
+[{
+  "id": 1,
+  "first_name": "Alaster",
+  "last_name": "McKissack",
+  "email": "amckissack0@domainmarket.com",
+  "gender": "Male",
+  "ip_address": "107.201.55.98"
+}, {
+  "id": 2,
+  "first_name": "Kary",
+  "last_name": "Thorndale",
+  "email": "kthorndale1@nifty.com",
+  "gender": "Female",
+  "ip_address": "172.152.36.109"
+}, {
+  "id": 3,
+  "first_name": "Westley",
+  "last_name": "Emmott",
+  "email": "wemmott2@cisco.com",
+  "gender": "Male",
+  "ip_address": "104.62.125.170"
+}, {
+  "id": 4,
+  "first_name": "Gavrielle",
+  "last_name": "Danihel",
+  "email": "gdanihel3@yandex.ru",
+  "gender": "Female",
+  "ip_address": "98.98.209.17"
+}]

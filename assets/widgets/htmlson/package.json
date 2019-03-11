@@ -1,0 +1,34 @@
+{
+  "name": "htmlson.js",
+  "version": "1.0.7",
+  "description": "Convert JSON array of objects into to HTML table!",
+  "main": "src/htmlson.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jquery": "^3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adalenv/htmlson.js.git"
+  },
+  "keywords": [
+    "htmlson",
+    "jquery-plugin",
+    "json",
+    "html",
+    "adalenv",
+    "htmlson.js",
+    "table"
+  ],
+  "author": "Adalen Vladi,Redjan Ymeraj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adalenv/htmlson.js/issues"
+  },
+  "homepage": "https://adalenv.github.io/htmlson.js"
+}
