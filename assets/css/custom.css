@@ -1,5 +1,31 @@
 /* CSS Document */
 
+body {
+	background-size: contain;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: url('background.png');
+	z-index: -1;
+}
+	
+body:before {
+	z-index: -1;
+	content: '';
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	background-size: contain;
+	background: rgba(255,255,255,0.3);
+	background: -moz-linear-gradient(top, rgba(255,255,255,0.3) 0%, rgba(36,20,0,0.6) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0.3)), color-stop(100%, rgba(36,20,0,0.6)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0.3) 0%, rgba(36,20,0,0.6) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,0.3) 0%, rgba(36,20,0,0.6) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,0.3) 0%, rgba(36,20,0,0.6) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(36,20,0,0.6) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#241400', GradientType=0 );
+}
+
 form {
 	overflow:hidden;
 	padding-bottom: 5px;
