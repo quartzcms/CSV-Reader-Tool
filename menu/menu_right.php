@@ -24,9 +24,9 @@
     </div>
     <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
-            <li><span class="glyphicon glyphicon-move"></span> Drag the row with the arrows icon</li>
-            <li><span class="glyphicon glyphicon-remove"></span> Delete the row with the X icon</li>
-            <li><span class="glyphicon glyphicon-duplicate"></span> Duplicate the row with the double file icon</li>
+            <li><span class="glyphicon glyphicon-move"></span>Drag the row with the arrows icon</li>
+            <li><span class="glyphicon glyphicon-remove"></span>Delete the row with the X icon</li>
+            <li><span class="glyphicon glyphicon-duplicate"></span>Duplicate the row with the double file icon</li>
         </ul>
     </div>
 </div>

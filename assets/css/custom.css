@@ -26,6 +26,33 @@ body:before {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#241400', GradientType=0 );
 }
 
+.btn {
+	line-height: 1.5 !important;
+	height: auto;
+}
+
+.table_content .glyphicon {
+	padding: 0px;
+}
+
+body .btn-success {
+    background-color: rgba(36,20,0,0.6);
+    border: 1px solid rgba(36,20,0,0.1) !important;
+}
+
+body .btn-success:hover,
+body .btn-success:active,
+body .btn-success:active:focus,
+body .btn-success:focus {
+    background-color: rgba(36,20,0,0.8);
+}
+
+.nav.nav-stacked > li > a {
+    padding: 5px 10px;
+	border: 1px solid #eeeeee;
+	line-height: 1.5 !important
+}
+
 form {
 	overflow:hidden;
 	padding-bottom: 5px;
@@ -70,30 +97,50 @@ body .form-group {
 	display: block;
 }
 
+.table_content {
+}
+
+.table_content tr td,
+.table_content tr th {
+	vertical-align: middle !important;
+}
+
+.table_content tr th {
+	border: 1px solid #8fda8f !important;
+}
+
+.table_content tr td {
+	border: 1px solid #e2e2e2 !important;
+}
+
 .table_content label {
 	margin-right: 10px;
 }
 
 .table_content a {
-	padding: 0px 8px;
-	background-color: #f3f3f3;
-	display: inline-block;
-	height: 30px;
-	margin: 0px 1px !important;
-	border: 1px solid #e1e1e1;
-	line-height: 30px;
-	vertical-align: middle;
+    padding: 5px 8px;
+    background-color: #f3f3f3;
+    display: inline-block;
+    height: auto;
+    margin: 0px 1px !important;
+    border: 1px solid #e1e1e1;
+    line-height: 1em;
+    vertical-align: middle;
 }
 
 .table_content tr {
 	background-color: #ffffff;
 }
 
+.table_content tr input {
+	border: 0px;
+}
+
 .table_content tr td:nth-child(1),
 .table_content thead tr th:nth-child(1),
 .table_content tfoot tr th:nth-child(1) {
 	width: 110px;
-	border: 1px solid #090 !important;
+	border: 1px solid #8fda8f !important;
 }
 
 .table_content thead tr th:nth-child(1) a,
