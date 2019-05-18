@@ -84,12 +84,20 @@ $(document).ready( function() {
 			var elements = [];
 			$('.body-content .table_content tbody tr').each(function(index1, element1){
 				var content = $(element1).find('td:nth-child('+ form.find('select[name="column"]').val() +')').find('.input-value').html();
+				if(!isNaN(parseInt(content, 10))){
+					content = parseInt(content, 10);
+				}
 				elements[index1] = {sortby: content, index: index1 + 1};						
 			});
 			var sortbyName = elements.slice(0);
 			sortbyName.sort(function(a,b) {
-				var x = a.sortby.toLowerCase();
-				var y = b.sortby.toLowerCase();
+				if(isNaN(a.sortby) || isNaN(b.sortby)){
+					var x = a.sortby.toLowerCase();
+					var y = b.sortby.toLowerCase();
+				} else {
+					var x = a.sortby;
+					var y = b.sortby;
+				}
 				return x < y ? -1 : x > y ? 1 : 0;
 			});
 			var tbody = $('<tbody></tbody>');
