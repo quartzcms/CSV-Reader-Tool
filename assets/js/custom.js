@@ -80,7 +80,46 @@ $(document).ready( function() {
 			var formData = new FormData();
 			formData.append('file', file, newFileName);
 			formData.append('action', action);
+		} else if (form.hasClass('sort_file_asc')){
+			var elements = [];
+			$('.body-content .table_content tbody tr').each(function(index1, element1){
+				var content = $(element1).find('td:nth-child('+ form.find('select[name="column"]').val() +')').find('.input-value').html();
+				elements[index1] = {sortby: content, index: index1 + 1};						
+			});
+			var sortbyName = elements.slice(0);
+			sortbyName.sort(function(a,b) {
+				var x = a.sortby.toLowerCase();
+				var y = b.sortby.toLowerCase();
+				return x < y ? -1 : x > y ? 1 : 0;
+			});
+			var tbody = $('<tbody></tbody>');
+			for (i = 0; i < sortbyName.length; i++) {
+				tbody.append('<tr>' + $('.body-content .table_content tbody tr:nth-child(' + sortbyName[i].index + ')').html() + '</tr>');
+			}
+			$('.body-content .table_content tbody').html(tbody.html());
+			$('.body-content .table_content .input-row').execute_refresh();
+			return false;
+		} else if (form.hasClass('sort_file_desc')){
+			var elements = [];
+			$('.body-content .table_content tbody tr').each(function(index1, element1){
+				var content = $(element1).find('td:nth-child('+ form.find('select[name="column"]').val() +')').find('.input-value').html();
+				elements[index1] = {sortby: content, index: index1 + 1};						
+			});
+			var sortbyName = elements.slice(0);
+			sortbyName.sort(function(a,b) {
+				var x = a.sortby.toLowerCase();
+				var y = b.sortby.toLowerCase();
+				return x > y ? -1 : x < y ? 1 : 0;
+			});
+			var tbody = $('<tbody></tbody>');
+			for (i = 0; i < sortbyName.length; i++) {
+				tbody.append('<tr>' + $('.body-content .table_content tbody tr:nth-child(' + sortbyName[i].index + ')').html() + '</tr>');
+			}
+			$('.body-content .table_content tbody').html(tbody.html());
+			$('.body-content .table_content .input-row').execute_refresh();
+			return false;
 		}
+		
 		$.ajax({
 			type: "POST",
 			enctype: 'multipart/form-data',
@@ -158,6 +197,14 @@ $(document).ready( function() {
 					});
 					
 					$('.body-content .table_content .input-row').execute_refresh();
+					
+					$('select[name="column"]').html('');
+					$('.body-content .table_content thead tr th').each(function(index1, element1){
+						if(index1 != 0){
+							var columm = index1 + 1;
+							$('select[name="column"]').append('<option value="' + columm + '">Sort by Column ' + index1 + '</option>');
+						}
+					});
 				}
 			},
 			error: function(request, ajaxOptions, thrownError) {

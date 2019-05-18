@@ -43,6 +43,22 @@
             </li>
             <li><a class="clone_row" data-value='0'><span class="glyphicon glyphicon-duplicate"></span>Clone first row</a></li>
             <li><a class="clone_row" data-value='-1'><span class="glyphicon glyphicon-duplicate"></span>Clone last row</a></li>
+            <li>
+                <form class="sort_file_asc" enctype="multipart/form-data">
+                    <select name="column" class="form-control">
+                		<option value="0">Select a column</option>
+                    </select>
+                    <input type="submit" name="submit" class="form-control btn btn-danger" value="Sort Ascending" />
+            	</form>
+            </li>
+            <li>
+                <form class="sort_file_desc" enctype="multipart/form-data">
+                    <select name="column" class="form-control">
+                		<option value="0">Select a column</option>
+                    </select>
+                    <input type="submit" name="submit" class="form-control btn btn-danger" value="Sort Descending" />
+            	</form>
+            </li>
         </ul>
     </div>
 </div>
