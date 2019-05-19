@@ -9,6 +9,7 @@
                     <label class="btn btn-primary btn-file">
                         Browse <input type="file" name="file" class="file" style="display: none;">
                     </label>
+                    <input type="hidden" value="" class="upload_filename" name="action" />
                     <input type="hidden" value="upload" class="action" name="action" />
                     <input type="submit" name="submit" class="btn btn-success" value="Upload" />
                 </form>

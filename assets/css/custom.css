@@ -186,6 +186,10 @@ form.sort_file_desc {
 	padding-bottom: 0px;
 }
 
+.history li a {
+	cursor: pointer;
+}
+
 form.sort_file_asc .form-control,
 form.sort_file_desc .form-control {
 	margin-bottom: 5px;

@@ -7,6 +7,24 @@ $(document).on('change', ':file', function() {
 	input.trigger('fileselect', [numFiles, label]);
 });
 
+var get_current_date = function() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1;
+	var yyyy = today.getFullYear();
+	var hh = today.getHours();
+	var ii = today.getMinutes();
+	var ss = today.getSeconds();
+	
+	if(dd<10) {	dd = '0'+dd } 
+	if(mm<10) {	mm = '0'+mm	} 
+	if(hh<10) {	hh = '0'+hh	} 
+	if(ii<10) {	ii = '0'+ii	} 
+	if(ss<10) {	ss = '0'+ss	} 
+	today =  dd + '-' + mm + '-' + yyyy + '_' + hh + ':' + ii + ':' + ss;
+	return today;
+}
+
 $(document).ready( function() {
 	$(':file').on('fileselect', function(event, numFiles, label) {
 		console.log(numFiles);
@@ -65,21 +83,44 @@ $(document).ready( function() {
 		$('.body-content .save_file input[type="submit"]').click();
 	});
 	
+	$('body').delegate('a.go_back', 'click', function(e){
+		$('form.load').find('input[type="submit"]').removeAttr('disabled');
+		var file = $(this).attr('data-file');
+		$('form.load').find('input[name="filename"]').val(file);
+		$('form.delete_file').find('input[name="filename"]').val(file);
+		if(file != 'none'){
+			$('ul li.filename').html(file);
+			$('ul li a.download').attr('href', '/cgi-bin/' + file);
+		}
+		$('form.load input[type="submit"]').click();
+		$('form.load').find('input[type="submit"]').attr('disabled', 'disabled');
+	});
+	
 	$('body').delegate('form', 'submit', function(e){
 		e.preventDefault();
 		var form = $(this);
 		var formData = new FormData($(this)[0]);
 		
-		if(form.hasClass('new_file')) {
+		if(form.hasClass('new_file')) {			
 			var file = $(this).find('.file').get(0).files[0];
+			form.find('.upload_filename').val(file.name);			
 			var action = $(this).find('.action').val();
 			var newFileName = file.name;
 			var extension = newFileName.split('.').pop();
 			var md5_encrypted = String(CryptoJS.MD5(newFileName));
-			newFileName = md5_encrypted.slice(1, 7) + '.' + extension;
+			var date = get_current_date();
+			newFileName = md5_encrypted.slice(1, 3) + '_' + date + '.' + extension;
 			var formData = new FormData();
 			formData.append('file', file, newFileName);
 			formData.append('action', action);
+		} else if (form.hasClass('save_file')) {
+			var newFileName = $('form.new_file').find('.upload_filename').val();
+			var extension = newFileName.split('.').pop();
+			var md5_encrypted = String(CryptoJS.MD5(newFileName));
+			var date = get_current_date();
+			newFileName = md5_encrypted.slice(1, 3) + '_' + date + '.' + extension;
+			$('form.save_file').find('input[name="file"]').val('../upload/' + newFileName);
+			formData.append('file', '../upload/' + newFileName);	
 		} else if (form.hasClass('sort_file_asc')){
 			var elements = [];
 			$('.body-content .table_content tbody tr').each(function(index1, element1){
@@ -141,19 +182,35 @@ $(document).ready( function() {
 				if(data.html) {
 					$('.body-content').prepend('<div>' + data.html + '</div>');
 				}
-				if(form.hasClass('new_file')) {
+				if(form.hasClass('new_file')) {					
 					$('form.load').find('input[type="submit"]').attr('disabled', 'disabled');
 					$('form.load').find('input[name="filename"]').val(data.file);
 					$('form.delete_file').find('input[name="filename"]').val(data.file);
 					if(data.file != 'none'){
 						$('ul li.filename').html(data.file);
 						$('ul li a.download').attr('href', '/cgi-bin/' + data.file);
+						var filename = data.file;
+						$('.history').append('<li><a data-file="'+ data.file +'" class="go_back">' + filename.substring(filename.lastIndexOf('/')+1) + '</a></li>');
 						$('form.load').find('input[type="submit"]').removeAttr('disabled');
 					}
 					form.trigger("reset");
-				} else if (form.hasClass('save_file')){ 
+				} else if (form.hasClass('save_file')){
+					$('form.load').find('input[name="filename"]').val(data.file);
+					$('form.delete_file').find('input[name="filename"]').val(data.file);
+					if(data.file != 'none'){
+						$('ul li.filename').html(data.file);
+						$('ul li a.download').attr('href', '/cgi-bin/' + data.file);
+						var filename = data.file;
+						$('.history').append('<li><a data-file="'+ data.file +'" class="go_back">' + filename.substring(filename.lastIndexOf('/')+1) + '</a></li>');
+					}
 					$('form.load').find('input[type="submit"]').removeAttr('disabled');
 				} else if (form.hasClass('delete_file')){
+					$('.go_back').each(function(index1, element1){
+						if($('ul li.filename').text() == $(element1).attr('data-file')){
+							$(element1).parent().remove();
+						}
+					});
+					
 					$('ul li.filename').html(''); 
 					$('form.load').find('input[type="submit"]').attr('disabled', 'disabled');
 				} else if (form.hasClass('load')){

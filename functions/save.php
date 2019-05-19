@@ -11,5 +11,5 @@ foreach($new_array as $value){
 }
 fclose($csv);
 
-echo json_encode(array('html' => 'The file was saved'));
+echo json_encode(array('html' => 'The file was saved', 'file' => $file));
 ?>

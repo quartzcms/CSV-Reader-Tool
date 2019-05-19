@@ -20,6 +20,20 @@
 
 <div class="panel panel-info">
     <div class="panel-heading">
+        <h3 class="panel-title" align="center">History</h3>
+    </div>
+    <div class="panel-body">
+    	<ul class="nav nav-pills nav-stacked">
+            <li>Click on the version to load it</li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked history">
+            <li class="init"></li>
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
         <h3 class="panel-title" align="center">Options</h3>
     </div>
     <div class="panel-body">
