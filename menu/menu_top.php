@@ -15,6 +15,12 @@
                     <a href="https://www.csv-reader-tool.ca/" target="_parent">Home</a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a onclick="return window.print();" target="_parent">Print</a>
+                </li>
+            </ul>
         </div>
+        
     </div>
 </nav>

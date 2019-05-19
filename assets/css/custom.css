@@ -186,6 +186,11 @@ form.sort_file_desc {
 	padding-bottom: 0px;
 }
 
+form.convert_file {
+	margin: 5px 0px;
+	padding: 0px;
+}
+
 .history li a {
 	cursor: pointer;
 }

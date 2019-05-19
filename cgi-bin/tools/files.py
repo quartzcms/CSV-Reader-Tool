@@ -3,6 +3,8 @@ import cgi
 import os
 import requests
 import pandas as pd
+import csv
+import chardet
 
 class Files():
 	def __init__(self, form, output):
@@ -57,6 +59,28 @@ class Files():
 			message = 'No file was deleted'
 		self.output["html"] = message
 		
+		return self.output
+	
+	def csv_to_text(self):
+		file_base = os.path.basename(self.form['filename'].value)
+		filename, file_extension = os.path.splitext(file_base)
+		csv_file = "../upload/" + file_base
+		txt_file = "../upload/" + filename + ".txt"
+		
+		rawdata = b''
+		with open(csv_file, 'rb') as thefile:
+			while True:
+				getdata = thefile.read(100000)
+				if not getdata:
+					break
+				rawdata += getdata
+		file_encoding = chardet.detect(rawdata)
+		
+		with open(csv_file, 'r', encoding=file_encoding['encoding']) as f:
+			lines = f.readlines()
+			with open(txt_file, "w", encoding=file_encoding['encoding']) as f1:
+				f1.writelines(lines)
+		self.output["html"] = 'File converted to text'		
 		return self.output
 		
 def main():

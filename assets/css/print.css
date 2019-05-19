@@ -1,0 +1,35 @@
+body {
+	padding: 0px !important;
+	background: none !important;
+}
+
+body * {
+	position: relative;
+	float: none;
+	overflow:visible;
+	background-color: transparent !importantt;
+	font-size: 12px !important;
+	-webkit-box-shadow:none !important;
+	box-shadow:none !important;
+	padding: 0px !important;
+	margin: 0px !important;
+	width: auto !important;
+}
+
+label {
+	border: 0px !important
+}
+
+body table.table_content tr td,
+body table.table_content tr th {
+	padding: 0px 10px !important;
+}
+
+.menu_top, .menu_left, .menu_right,
+.main_content .panel-heading,
+.main_content .panel-danger,
+.table_content .clone_row,
+.table_content .delete_row,
+.table_content .move {
+	display: none !important;
+}

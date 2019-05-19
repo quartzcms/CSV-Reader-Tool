@@ -88,9 +88,11 @@ $(document).ready( function() {
 		var file = $(this).attr('data-file');
 		$('form.load').find('input[name="filename"]').val(file);
 		$('form.delete_file').find('input[name="filename"]').val(file);
+		$('form.convert').find('input[name="filename"]').val(file);
 		if(file != 'none'){
 			$('ul li.filename').html(file);
-			$('ul li a.download').attr('href', '/cgi-bin/' + file);
+			$('ul li a.download-csv').attr('href', '/cgi-bin/' + file);
+			$('ul li a.download-text').attr('href', '/cgi-bin/' + file.replace('.csv', '.txt'));
 		}
 		$('form.load input[type="submit"]').click();
 		$('form.load').find('input[type="submit"]').attr('disabled', 'disabled');
@@ -182,24 +184,32 @@ $(document).ready( function() {
 				if(data.html) {
 					$('.body-content').prepend('<div>' + data.html + '</div>');
 				}
+				$('a.download-text').parent().css('display', 'none');
 				if(form.hasClass('new_file')) {					
 					$('form.load').find('input[type="submit"]').attr('disabled', 'disabled');
 					$('form.load').find('input[name="filename"]').val(data.file);
+					$('form.convert_file').find('input[name="filename"]').val(data.file);
 					$('form.delete_file').find('input[name="filename"]').val(data.file);
 					if(data.file != 'none'){
 						$('ul li.filename').html(data.file);
-						$('ul li a.download').attr('href', '/cgi-bin/' + data.file);
+						$('ul li a.download-csv').attr('href', data.file);
 						var filename = data.file;
 						$('.history').append('<li><a data-file="'+ data.file +'" class="go_back">' + filename.substring(filename.lastIndexOf('/')+1) + '</a></li>');
 						$('form.load').find('input[type="submit"]').removeAttr('disabled');
 					}
 					form.trigger("reset");
+				} else if (form.hasClass('convert_file')){
+					$('form.load').find('input[type="submit"]').removeAttr('disabled');
+					$('a.download-text').parent().css('display', 'block');
+					var text_file = $('a.download-csv').attr('href');
+					$('ul li a.download-text').attr('href', text_file.replace('.csv', '.txt'));
 				} else if (form.hasClass('save_file')){
 					$('form.load').find('input[name="filename"]').val(data.file);
 					$('form.delete_file').find('input[name="filename"]').val(data.file);
+					$('form.convert_file').find('input[name="filename"]').val(data.file);
 					if(data.file != 'none'){
 						$('ul li.filename').html(data.file);
-						$('ul li a.download').attr('href', '/cgi-bin/' + data.file);
+						$('ul li a.download-csv').attr('href', data.file);
 						var filename = data.file;
 						$('.history').append('<li><a data-file="'+ data.file +'" class="go_back">' + filename.substring(filename.lastIndexOf('/')+1) + '</a></li>');
 					}

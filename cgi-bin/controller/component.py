@@ -27,6 +27,8 @@ class Excel():
 			self.output = files_class.upload_file()
 		elif target == 'delete':
 			self.output = files_class.delete_file()
+		elif target == 'convert':
+			self.output = files_class.csv_to_text()
 		elif target == 'load':
 			self.output = load_class.import_document()
 		return self.output

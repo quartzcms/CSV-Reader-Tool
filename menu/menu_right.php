@@ -13,7 +13,15 @@
                 </form>
             </li>
             <li>You can load or reload a file you've uploaded</li>
-            <li><a href="#" class="download"><span class="glyphicon glyphicon-download-alt"></span>Download</a></li>
+            <li><a href="#" class="download-csv" target="_blank"><span class="glyphicon glyphicon-download-alt"></span>Download as CSV</a></li>
+            <li>
+            	<form action="cgi-bin/excel.cgi" class="convert_file" method="post">
+                    <input type="hidden" value="convert" name="action" />
+                    <input type="hidden" value="" name="filename" />
+                    <input type="submit" name="submit" class="btn btn-success" value="Convert to Text" />
+                </form>
+            </li>
+            <li><a href="#" class="download-text" target="_blank"><span class="glyphicon glyphicon-download-alt"></span>Download as Text</a></li>
         </ul>
     </div>
 </div>
