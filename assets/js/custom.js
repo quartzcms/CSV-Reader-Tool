@@ -74,8 +74,18 @@ $(document).ready( function() {
 		
 		rows_count = $('.body-content .table_content tbody tr').length;
 		$('.body-content .table_content tbody tr:nth-child(' + rows_count +')').find('td.contain-input').each(function(index1, element1){
-			$(element1).html('<div class="input-value" style="display:none;">' + $(element1).text() + '</div><input type="text" value="' + $(element1).text() + '" name="col['+ rows_count +']['+ index1 +']" class="input-row" />');
+			$(element1).html('<div class="input-value" style="display:none;">' + $(element1).text() + '</div><input type="text" value="' + $(element1).text() + '" name="col['+ rows_count +']['+ index1 +']" class="input-row" /><a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
 		});
+		
+		row.sortable({
+				animation: 150,
+				scroll: true,
+				handle: '.move-col',
+				out: function () {
+					$('.body-content .table_content .input-row').execute_refresh();
+				}
+			}
+		);
 		
 		$('.body-content .table_content .input-row').execute_refresh();
 	});
