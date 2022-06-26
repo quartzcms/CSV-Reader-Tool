@@ -46,6 +46,14 @@ $(document).ready( function() {
 			});
 		});
 		
+		$('.body-content .table_content thead tr').each(function(index1, element1){
+			$(element1).find('th.contain-input').each(function(index2, element2){
+				$(element2).find('.add_col').attr('data-value', (index2 + 1));
+				$(element2).find('.remove_col').attr('data-value', (index2 + 2));
+				$(element2).find('input.input-row').attr('name', 'col_index['+ index1 +']['+ index2 +']');
+			});
+		});
+		
 		/* Add key column */
 		var i = 0;
 		$('.body-content .table_content tbody tr').each(function(index1, element1){
@@ -67,6 +75,58 @@ $(document).ready( function() {
 		rows_count = $('.body-content .table_content tbody tr').length;
 		$('.body-content .table_content tbody tr:nth-child(' + rows_count +')').find('td.contain-input').each(function(index1, element1){
 			$(element1).html('<div class="input-value" style="display:none;">' + $(element1).text() + '</div><input type="text" value="' + $(element1).text() + '" name="col['+ rows_count +']['+ index1 +']" class="input-row" />');
+		});
+		
+		$('.body-content .table_content .input-row').execute_refresh();
+	});
+	
+	$('body').delegate('a.remove_col', 'click', function(e){
+		$value = $(this).attr('data-value');
+		$('.body-content .table_content tbody tr').find('td:nth-child('+ $value +')').remove();
+		$('.body-content .table_content thead tr').find('th:nth-child('+ $value +')').remove();
+		$('.body-content .table_content .input-row').execute_refresh();
+	});
+	
+	$('body').delegate('a.add_col', 'click', function(e){
+		$value = $(this).attr('data-value');		
+		$('.body-content .table_content tbody tr').each(function(index1, element1){
+			if($value == '-1'){
+				$(this).find('td:first-child').after('<td class="contain-input"></td>');
+			} else if($value == '0') {
+				$(this).find('td:last-child').after('<td class="contain-input"></td>');
+			} else {
+				$(this).find('td:nth-child('+ $value +')').after('<td class="contain-input"></td>');
+			}
+		});
+		
+		$('.body-content .table_content thead tr').each(function(index1, element1){
+			if($value == '-1'){
+				$(this).find('th:first-child').after('<th class="contain-input"></th>');
+			} else if($value == '0') {
+				$(this).find('th:last-child').after('<th class="contain-input"></th>');
+			} else {
+				$(this).find('th:nth-child('+ $value +')').after('<th class="contain-input"></th>');
+			}
+		});
+		
+		$('.body-content .table_content thead tr').each(function(index1, element1){
+			if($value == '-1'){
+				$(this).find('th:nth-child(2)').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col_index[0][0]" class="input-row" /><a class="add_col" data-value="0"><span class="glyphicon glyphicon-plus"></span></a><a class="remove_col" data-value="0"><span class="glyphicon glyphicon-remove"></span></a>');
+			} else if($value == '0') {
+				$(this).find('th:last-child').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col_index[0][0]" class="input-row" /><a class="add_col" data-value="0"><span class="glyphicon glyphicon-plus"></span></a><a class="remove_col" data-value="0"><span class="glyphicon glyphicon-remove"></span></a>');
+			} else {
+				$(this).find('th:nth-child('+ (parseInt($value) + 1) +')').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col_index[0][0]" class="input-row" /><a class="add_col" data-value="0"><span class="glyphicon glyphicon-plus"></span></a><a class="remove_col" data-value="0"><span class="glyphicon glyphicon-remove"></span></a>');
+			}
+		});
+		
+		$('.body-content .table_content tbody tr').each(function(index1, element1){
+			if($value == '-1'){
+				$(this).find('td:nth-child(2)').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col[0][0]" class="input-row" /><a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
+			} else if($value == '0') {
+				$(this).find('td:last-child').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col[0][0]" class="input-row" /><a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
+			} else {
+				$(this).find('td:nth-child('+ (parseInt($value) + 1) +')').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col[0][0]" class="input-row" /><a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
+			}
 		});
 		
 		$('.body-content .table_content .input-row').execute_refresh();
@@ -281,11 +341,15 @@ $(document).ready( function() {
 						new_index.append('<a class="move"><span class="glyphicon glyphicon-move"></span></a>');
 					});
 					
-					$('.body-content .table_content tbody tr td').each(function(index1, element1){
+					$('.body-content .table_content tbody tr td:not(:first-child)').each(function(index1, element1){
 						$(element1).append('<a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
 					});
+					$('.body-content .table_content thead tr th:not(:first-child)').each(function(index1, element1){
+						$(element1).append('<a class="add_col" data-value="'+ (index1 + 1) +'"><span class="glyphicon glyphicon-plus"></span></a>');
+						$(element1).append('<a class="remove_col" data-value="'+ (index1 + 2) +'"><span class="glyphicon glyphicon-remove"></span></a>');
+					});
 					
-					$('.body-content .table_content tbody tr td:not(:nth-child(1))').click(function(e){
+					$('.body-content').delegate('td:not(:nth-child(1))', 'click', function(e){
 						if(e.target.className != 'move-col'){
 							if($(this).find('textarea').length == 0){
 								$(this).addClass('edit-time');
@@ -295,7 +359,7 @@ $(document).ready( function() {
 						}
 					});
 					
-					$('.body-content .table_content tbody tr td:not(:nth-child(1))').click(function(e){					
+					$('.body-content').delegate('td:not(:nth-child(1))', 'click', function(e){
 						if(e.target.className == 'close'){
 							$(this).removeClass('edit-time');
 							$(this).find('input').val($(this).find('textarea').val());
@@ -308,7 +372,7 @@ $(document).ready( function() {
 					var origin_name;
 					var origin_value;
 					
-					$('.body-content .table_content').mousedown(function(e){					
+					$('.body-content').delegate('table', 'mousedown', function(e){
 						if(drag_down == 0 && e.target.tagName == 'INPUT' && e.target.className == 'input-row'){
 							origin_value = e.target.value;
 							origin_name = e.target.name;
@@ -317,26 +381,29 @@ $(document).ready( function() {
 						}
 					});
 					
-					$('.body-content .table_content').mouseup(function(e){
+					$('.body-content').delegate('table', 'mouseup', function(e){
 						$(this).find('tbody tr td input').each(function(index1, element1){
+							$(element1).css('border', 'none');
+						});
+						$(this).find('thead tr th input').each(function(index1, element1){
 							$(element1).css('border', 'none');
 						});
 						drag_down = 0;
 						origin_value = '';
 					});
 					
-					$('.body-content .table_content').mousemove(function(x){
+					$('.body-content').delegate('table', 'mousemove', function(x){
 						if(drag_down == 1 && x.target.tagName == 'INPUT' && x.target.name != origin_name && x.target.className == 'input-row'){
 							x.target.value = origin_value;
 							x.target.style.border = '1px solid #ff0000';
 						}
 					});
 					
-					$('.body-content .table_content tbody tr td:not(:nth-child(1))').mousedown(function(){
+					$('.body-content').delegate('td:not(:nth-child(1))', 'mousedown', function(){
 						$(this).addClass('optimized');
 					});
 					
-					$('.body-content .table_content').mouseup(function(){
+					$('.body-content').delegate('table', 'mouseup', function(){
 						$(this).find('tbody tr td:not(:nth-child(1))').each(function(index1, element1){
 							$(element1).removeClass('optimized');
 						});

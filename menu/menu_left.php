@@ -42,6 +42,8 @@
         	<li>
             	A few option available on the editing table view
             </li>
+			<li><a class="add_col" data-value='0'><span class="glyphicon glyphicon-plus"></span>Append column</a></li>
+			<li><a class="add_col" data-value='-1'><span class="glyphicon glyphicon-plus"></span>Prepend column</a></li>
             <li><a class="clone_row" data-value='0'><span class="glyphicon glyphicon-duplicate"></span>Clone first row</a></li>
             <li><a class="clone_row" data-value='-1'><span class="glyphicon glyphicon-duplicate"></span>Clone last row</a></li>
             <li>

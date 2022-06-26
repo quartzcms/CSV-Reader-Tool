@@ -105,12 +105,40 @@ body .form-group {
 	display: block;
 }
 
-.move-col {
+.move-col, 
+th .add_col,
+th .remove_col {
 	visibility: hidden !important;
 	position: absolute;
 	z-index: 9997;
 	right: 0px;
 	top: 3px;
+}
+
+th .add_col {
+	top: 1px;
+}
+
+th .remove_col {
+	top: inherit;
+	bottom: 1px;
+}
+
+.move-col,
+th .add_col ,
+th .remove_col {
+	padding: 0px 2px !important;
+}
+
+.move-col span,
+th .add_col span,
+th .remove_col span {
+	font-size: 8px;
+	padding: 0px;
+	position: relative !important;
+	right: inherit !important;
+	top: 0px !important;
+	left: 0px !important;
 }
 
 .table_content tbody tr td.optimized {
@@ -143,7 +171,7 @@ body .form-group {
 	text-align: center;
 	color: #ff0000;
 	border: 1px solid #ff0000;
-	padding: 5px;
+	padding: 4px 5px;
 	box-sizing: border-box;
 	height: 20px;
 	width: 20px;
@@ -162,7 +190,9 @@ body .form-group {
 	position: relative;
 }
 
-.table_content tbody tr td:hover  .move-col{
+.table_content tbody tr td:hover  .move-col,
+.table_content thead tr th:hover  .add_col,
+.table_content thead tr th:hover  .remove_col {
 	visibility: visible !important;
 }
 
