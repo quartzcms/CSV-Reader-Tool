@@ -58,6 +58,14 @@ form {
 	padding-bottom: 5px;
 }
 
+body .main_content .panel .panel-body {
+	overflow:visible;
+}
+
+body .main_content form {
+	overflow:visible;
+}
+
 nav {
 	margin-top: 15px;
 }
@@ -95,6 +103,67 @@ body .form-group {
 	background: white;
 	cursor: inherit;
 	display: block;
+}
+
+.move-col {
+	visibility: hidden !important;
+	position: absolute;
+	z-index: 9997;
+	right: 0px;
+	top: 3px;
+}
+
+.table_content tbody tr td.optimized {
+	border: 1px solid #ff0000 !important;
+	display: inline-block;
+}
+
+.table_content tbody tr td textarea:focus-visible {
+	border: 1px solid #ff0000 !important;
+}
+
+.table_content tbody tr td input:focus-visible  {
+	border: 1px solid #ff0000 !important;
+}
+
+.table_content tbody tr td textarea {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	overflow: visible;
+	left: 0px;
+	top: 0px;
+	z-index: 9998;
+	border: 1px solid #f00;
+	padding: 10px;
+}
+
+.table_content tbody tr td .close {
+	font-size: 11px;
+	text-align: center;
+	color: #ff0000;
+	border: 1px solid #ff0000;
+	padding: 5px;
+	box-sizing: border-box;
+	height: 20px;
+	width: 20px;
+	display:block;
+	position: absolute;
+	z-index: 9999;
+	left: 275px;
+	top: 5px;
+}
+
+.table_content tbody tr td.optimized * {
+	color: #ff0000 !important;
+}
+
+.table_content tbody tr td {
+	position: relative;
+}
+
+.table_content tbody tr td:hover  .move-col{
+	visibility: visible !important;
 }
 
 .table_content {

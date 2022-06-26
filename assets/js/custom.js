@@ -241,6 +241,16 @@ $(document).ready( function() {
 						}
 					);
 					
+					$('.body-content .table_content tbody tr').sortable({
+							animation: 150,
+							scroll: true,
+							handle: '.move-col',
+							out: function () {
+								$('.body-content .table_content .input-row').execute_refresh();
+							}
+						}
+					);
+					
 					$('.body-content .table_content td, .body-content .table_content th').addClass('contain-input');
 					
 					$('.body-content .table_content thead tr').each(function(index1, element1){
@@ -269,6 +279,67 @@ $(document).ready( function() {
 						new_index.append('<a class="clone_row" data-value="'+ index1 + '"><span class="glyphicon glyphicon-duplicate"></span></a>');
 						new_index.append('<a class="delete_row" data-value="'+ index1 + '"><span class="glyphicon glyphicon-remove"></span></a>');
 						new_index.append('<a class="move"><span class="glyphicon glyphicon-move"></span></a>');
+					});
+					
+					$('.body-content .table_content tbody tr td').each(function(index1, element1){
+						$(element1).append('<a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
+					});
+					
+					$('.body-content .table_content tbody tr td:not(:nth-child(1))').click(function(e){
+						if(e.target.className != 'move-col'){
+							if($(this).find('textarea').length == 0){
+								$(this).addClass('edit-time');
+								$(this).prepend('<textarea class="textarea-row" name="'+ $(this).find('input').attr('name') +'">' + $(this).find('input').val() + '</textarea>');
+								$(this).prepend('<div class="close">X<div>');
+							}
+						}
+					});
+					
+					$('.body-content .table_content tbody tr td:not(:nth-child(1))').click(function(e){					
+						if(e.target.className == 'close'){
+							$(this).removeClass('edit-time');
+							$(this).find('input').val($(this).find('textarea').val());
+							$(this).find('textarea').remove();
+							$(this).find('.close').remove();
+						}
+					});
+					
+					var drag_down = 0;
+					var origin_name;
+					var origin_value;
+					
+					$('.body-content .table_content').mousedown(function(e){					
+						if(drag_down == 0 && e.target.tagName == 'INPUT' && e.target.className == 'input-row'){
+							origin_value = e.target.value;
+							origin_name = e.target.name;
+							drag_down = 1;
+							e.target.style.border = '1px solid #ff0000';
+						}
+					});
+					
+					$('.body-content .table_content').mouseup(function(e){
+						$(this).find('tbody tr td input').each(function(index1, element1){
+							$(element1).css('border', 'none');
+						});
+						drag_down = 0;
+						origin_value = '';
+					});
+					
+					$('.body-content .table_content').mousemove(function(x){
+						if(drag_down == 1 && x.target.tagName == 'INPUT' && x.target.name != origin_name && x.target.className == 'input-row'){
+							x.target.value = origin_value;
+							x.target.style.border = '1px solid #ff0000';
+						}
+					});
+					
+					$('.body-content .table_content tbody tr td:not(:nth-child(1))').mousedown(function(){
+						$(this).addClass('optimized');
+					});
+					
+					$('.body-content .table_content').mouseup(function(){
+						$(this).find('tbody tr td:not(:nth-child(1))').each(function(index1, element1){
+							$(element1).removeClass('optimized');
+						});
 					});
 					
 					$('.body-content .table_content .input-row').execute_refresh();
