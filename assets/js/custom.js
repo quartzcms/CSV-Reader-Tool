@@ -94,6 +94,15 @@ $(document).ready( function() {
 		$value = $(this).attr('data-value');
 		$('.body-content .table_content tbody tr').find('td:nth-child('+ $value +')').remove();
 		$('.body-content .table_content thead tr').find('th:nth-child('+ $value +')').remove();
+		
+		$('select[name="column"]').html('');
+		$('.body-content .table_content thead tr th').each(function(index1, element1){
+			if(index1 != 0){
+				var columm = index1 + 1;
+				$('select[name="column"]').append('<option value="' + columm + '">Sort by Column ' + index1 + '</option>');
+			}
+		});
+		
 		$('.body-content .table_content .input-row').execute_refresh();
 	});
 	
@@ -136,6 +145,14 @@ $(document).ready( function() {
 				$(this).find('td:last-child').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col[0][0]" class="input-row" /><a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
 			} else {
 				$(this).find('td:nth-child('+ (parseInt($value) + 1) +')').html('<div class="input-value" style="display:none;"></div><input type="text" value="" name="col[0][0]" class="input-row" /><a class="move-col"><span class="glyphicon glyphicon-move"></span></a>');
+			}
+		});
+		
+		$('select[name="column"]').html('');
+		$('.body-content .table_content thead tr th').each(function(index1, element1){
+			if(index1 != 0){
+				var columm = index1 + 1;
+				$('select[name="column"]').append('<option value="' + columm + '">Sort by Column ' + index1 + '</option>');
 			}
 		});
 		
@@ -372,6 +389,8 @@ $(document).ready( function() {
 					$('.body-content').delegate('td:not(:nth-child(1))', 'click', function(e){
 						if(e.target.className == 'close'){
 							$(this).removeClass('edit-time');
+							$(this).find('input').attr('value', $(this).find('textarea').val());
+							$(this).find('.input-value').text($(this).find('textarea').val());
 							$(this).find('input').val($(this).find('textarea').val());
 							$(this).find('textarea').remove();
 							$(this).find('.close').remove();
@@ -405,6 +424,8 @@ $(document).ready( function() {
 					$('.body-content').delegate('table', 'mousemove', function(x){
 						if(drag_down == 1 && x.target.tagName == 'INPUT' && x.target.name != origin_name && x.target.className == 'input-row'){
 							x.target.value = origin_value;
+							$(x.target).attr('value', origin_value);
+							$(x.target).parent().find('.input-value').text(origin_value);
 							x.target.style.border = '1px solid #ff0000';
 						}
 					});

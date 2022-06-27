@@ -1,3 +1,4 @@
+<?php include_once("/var/www/demo.csv-reader-tool.ca/public_html/blockscript/detector.php"); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,6 +14,7 @@
 		<title>Excel</title>
         <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="assets/css/screen.css">
+        <link rel="stylesheet" media="print" type="text/css" href="assets/css/print.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -26,16 +28,16 @@
 	</head>
 	<body>
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row menu_top">
 				<div class="col-md-12">
 					<?php include('menu/menu_top.php') ?>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2 menu_left">
 					<?php include('menu/menu_left.php') ?>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-8 main_content">
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h3 class="panel-title" align="right">
@@ -60,7 +62,7 @@
 						</div>
 					</div>
 				</div>
-                <div class="col-md-2">
+                <div class="col-md-2 menu_right">
 					<?php include('menu/menu_right.php') ?>
 				</div>
 			</div>
