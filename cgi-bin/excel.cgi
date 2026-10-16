@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-print("Content-type: application/json; charset=UTF-8\n\n")
-import sys
 import json
 import cgi
-import cgitb
-cgitb.enable(display=1)
-sys.path.append("main")
+
 import controller.component as component
-form = cgi.FieldStorage()
+
+# Blank fields must be kept so empty columns and cells are exported.
+form = cgi.FieldStorage(keep_blank_values=True)
+print("Content-Type: application/json; charset=utf-8")
+print()
 print(json.dumps(component.main(form)))

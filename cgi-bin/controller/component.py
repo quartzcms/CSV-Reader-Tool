@@ -1,38 +1,39 @@
-import cgi
-import sys
-sys.path.append("tools")
-import tools.files as files
-import tools.load as load
+import logging
 
-class Excel():
-	def __init__(self, form, output):
-		self.form = form
-		self.output = output
-	
-	def action(self):
-		try:
-			form_field =  self.form['action'].value
-		except KeyError:
-			form_field =  ""
-		return form_field
-		
-	def selection(self):
-		target = self.action()			
-		files_class = files.Files(self.form, {})
-		load_class = load.Load(self.form, {})
-		
-		if target == 'save':
-			self.output = files_class.save_file()
-		elif target == 'upload':
-			self.output = files_class.upload_file()
-		elif target == 'delete':
-			self.output = files_class.delete_file()
-		elif target == 'convert':
-			self.output = files_class.csv_to_text()
-		elif target == 'load':
-			self.output = load_class.import_document()
-		return self.output
-	
-def main(form_cgi):	
-	excel_class = Excel(form_cgi, {})
-	return excel_class.selection()
+from tools.files import FileActionError, Files, field_value
+from tools.load import Load
+
+
+class Excel:
+    def __init__(self, form, output=None):
+        self.form = form
+        self.output = output if output is not None else {}
+        files = Files(form, self.output)
+        self.actions = {
+            "upload": files.upload_file,
+            "save": files.save_file,
+            "delete": files.delete_file,
+            "convert": files.csv_to_text,
+            "load": Load(form, self.output).import_document,
+        }
+
+    def selection(self):
+        action = field_value(self.form, "action")
+        handler = self.actions.get(action)
+        if handler is None:
+            return {"error": True, "html": "Unsupported action.", "file": "none"}
+        try:
+            return handler()
+        except FileActionError as error:
+            return {"error": True, "html": str(error), "file": "none"}
+        except OSError:
+            logging.exception("CSV file operation failed")
+            return {
+                "error": True,
+                "html": "The file operation could not be completed.",
+                "file": "none",
+            }
+
+
+def main(form_cgi):
+    return Excel(form_cgi).selection()

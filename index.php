@@ -1,4 +1,3 @@
-<?php include_once("/var/www/demo.csv-reader-tool.ca/public_html/blockscript/detector.php"); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,20 +10,18 @@
         <meta name="theme-color" content="#ffffff">
     	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="content-type" content="utf-8" />
-		<title>Excel</title>
+		<title>Demo - CSV-Reader Tool</title>
         <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="assets/css/screen.css">
         <link rel="stylesheet" media="print" type="text/css" href="assets/css/print.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/custom.min.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="assets/js/crypto-core-min.js"></script>
-        <script src="assets/js/md5-min.js"></script>
         <script type="text/javascript" src="assets/widgets/htmlson/src/htmlson.js"></script>
 		<script type="text/javascript" src="assets/bootstrap/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/buildtable.js"></script>
 		<script type="text/javascript" src="assets/js/popup.js"></script>
-        <script type="text/javascript" src="assets/js/custom.js"></script>
+        <script type="text/javascript" src="assets/js/custom.min.js"></script>
 	</head>
 	<body>
 		<div class="container-fluid">

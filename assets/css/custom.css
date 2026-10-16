@@ -106,6 +106,7 @@ body .form-group {
 }
 
 .move-col, 
+th .move_column,
 th .add_col,
 th .remove_col {
 	visibility: hidden !important;
@@ -119,18 +120,33 @@ th .add_col {
 	top: 1px;
 }
 
+th .move_column {
+	top: 1px;
+	right: auto;
+	left: 0px;
+	cursor: move;
+}
+
+.table_content.column-dragging,
+.table_content.column-dragging * {
+	cursor: move !important;
+	user-select: none;
+}
+
 th .remove_col {
 	top: inherit;
 	bottom: 1px;
 }
 
 .move-col,
+th .move_column,
 th .add_col ,
 th .remove_col {
 	padding: 0px 2px !important;
 }
 
 .move-col span,
+th .move_column span,
 th .add_col span,
 th .remove_col span {
 	font-size: 8px;
@@ -191,6 +207,7 @@ th .remove_col span {
 }
 
 .table_content tbody tr td:hover  .move-col,
+.table_content thead tr th:hover  .move_column,
 .table_content thead tr th:hover  .add_col,
 .table_content thead tr th:hover  .remove_col {
 	visibility: visible !important;
